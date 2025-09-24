@@ -70,3 +70,35 @@ header-includes:
 \tableofcontents
 \newpage
 
+# \textcolor{red}{Introduction}
+
+Les \textbf{SVM} (Support Vector Machines), introduits par Vapnik, sont des méthodes de classification très utilisées, en particulier pour la classification binaire. Elles reposent sur la recherche d’une règle de décision linéaire sous la forme d’un \textbf{hyperplan séparateur}. Pour traiter des problèmes plus complexes, cette recherche est effectuée non pas directement dans l’espace des données initiales, mais dans un \textbf{espace de caractéristiques} de grande dimension, obtenu grâce à une transformation non linéaire.
+
+L’objectif de ce TP est d’appliquer les SVM sur des données réelles et simulées à l’aide de la librairie \texttt{scikit-learn} (qui s’appuie sur \texttt{libsvm}). Nous apprendrons également à ajuster les \textbf{hyperparamètres} et le \textbf{choix du noyau} afin de mieux contrôler la flexibilité du modèle.
+
+
+# \textcolor{red}{Annexe}
+
+
+
+\begin{thebibliography}{9}
+
+\bibitem{scikit-learn}
+scikit-learn developers.  
+\textit{Support Vector Machines — scikit-learn documentation}.  
+\url{http://scikit-learn.org/stable/modules/svm.html}.  
+Consulté le 24 septembre 2025.
+
+\bibitem{wiki-en}
+Wikipedia.  
+\textit{Support vector machine}.  
+\url{http://en.wikipedia.org/wiki/Support_vector_machine}.  
+Consulté le 24 septembre 2025.
+
+\bibitem{wiki-fr}
+Wikipédia.  
+\textit{Machine à vecteurs de support}.  
+\url{http://fr.wikipedia.org/wiki/Machine_%C3%A0_vecteurs_de_support}.  
+Consulté le 24 septembre 2025.
+
+\end{thebibliography}
