@@ -42,6 +42,11 @@ Un script d’exemple (`svm_script.py`) est fourni pour illustrer l’utilisatio
 
 ---
 
+## Génération du rapport
+
+Pour compiler le fichier `.tex` et obtenir le PDF du rapport :
+
+---
 ## Références
 
 - Hastie, Tibshirani, Friedman. *The Elements of Statistical Learning*, Springer, 2009.  
