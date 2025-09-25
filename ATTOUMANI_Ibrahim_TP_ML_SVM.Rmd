@@ -75,20 +75,48 @@ header-includes:
 Les \textbf{SVM} (Support Vector Machines), introduits par Vapnik, sont des méthodes de classification très utilisées, en particulier pour la classification binaire. Elles reposent sur la recherche d’une règle de décision linéaire sous la forme d’un \textbf{hyperplan séparateur}. Pour traiter des problèmes plus complexes, cette recherche est effectuée non pas directement dans l’espace des données initiales, mais dans un \textbf{espace de caractéristiques} de grande dimension, obtenu grâce à une transformation non linéaire.
 
 L’objectif de ce TP est d’appliquer les SVM sur des données réelles et simulées à l’aide de la librairie \texttt{scikit-learn} (qui s’appuie sur \texttt{libsvm}). Nous apprendrons également à ajuster les \textbf{hyperparamètres} et le \textbf{choix du noyau} afin de mieux contrôler la flexibilité du modèle.
+\newpage
 
-# \textcolor{red}{2. SVM linéaire : discrimination entre les classes 1 et 2 d’Iris}
+
+# \textcolor{red}{2. Classification sur les donnée Iris}
 
 Dans cette section, nous allons mettre en œuvre un \textbf{SVM linéaire} afin de distinguer les classes \textbf{1 et 2} du jeu de données \textit{iris}. 
 Pour simplifier le problème, seules les \textbf{deux premières variables} seront utilisées. 
 Nous conserverons la moitié des données pour l'\textbf{apprentissage} et l'autre moitié pour le \textbf{test}, afin d'évaluer la capacité du modèle à bien généraliser.
 
-## \textcolor{blue}{Préparation des données}
+## \textcolor{blue}{2.1. SVM linéaire : discrimination entre les classes 1 et 2 d’Iris}
 
 Ici nous allons sélectionner les classes 1 et 2 du dataset \textit{iris}, puis conserver uniquement les deux premières variables (longueur et largeur des sépales) afin de simplifier la visualisation et la classification.
 
-```{r} 
-read.csv(data/iris.csv, sep = ",") 
-```
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{vis/classif_90test_10train.png}
+    \caption{SVM linéaire avec 90\% des données réservées au test}
+    \label{fig:svm_iris_90test_10train}
+\end{figure}
+
+
+Ci-dessus, on a dédiées 90\% des données pour le test, ce qui ne laisse qu'environ 10\% pour l'entraînement (soit seulement 10 points). 
+Avec si peu d'exemples, le SVM ne dispose pas d'assez d'informations pour bien apprendre. On a alors que la frontière de décision est très approximative et la précision sur le test chute à **0.48**, proche du hasard.
+
+
+En utilisant 40\% des données pour le test, nous obtenons une précision de 7\%. Comparée à la **figure 1**, la frontière de décision sépare mieux les points, bien que quelques erreurs de prédiction subsistent. La **figure 2** ci-dessous illustre cette visualisation.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{vis/classif_40test_60train.png}
+    \caption{SVM linéaire avec 40\% des données réservées au test}
+    \label{fig:svm_iris_40test_60train}
+\end{figure}
+
+
+## \textcolor{blue}{2.1. SVM polynomial : discrimination entre les classes 1 et 2 d’Iris}
+
+Dans cette section, nous entraînons un SVM avec noyau polynomial pour discriminer les classes 1 et 2 d’Iris. Ce noyau permet de modéliser des frontières de décision non linéaires, plus flexibles que celles du SVM linéaire.  Nous comparerons ensuite ses performances et sa frontière de décision avec celles du SVM linéaire présenté précédemment.
+
+
 
 \newpage
 # \textcolor{red}{Annexe}
