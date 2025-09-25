@@ -18,7 +18,7 @@ header-includes:
   - \addtolength{\topmargin}{-2.5pt}
   - \pagestyle{fancy}
   - \fancyhead[L]{\textcolor{purple}{M2 SSD - BIOSTAT}}
-  - \fancyhead[C]{\textcolor{purple}{Support Vector Machine \textbf{-} HAX908X}}
+  - \fancyhead[C]{\textcolor{purple}{Support Vector Machine \textbf{-} HAX907X}}
   - \fancyhead[R]{\textcolor{purple}{2025 \textbf{-} 2026}}
   - \fancyfoot[C]{\thepage}
   - \renewcommand{\contentsname}{Table des matières}
@@ -30,7 +30,7 @@ header-includes:
 \begin{center}
 
 % Logo en haut
-\includegraphics[width=0.3\linewidth]{vis/logo_m.png}\\[1.5cm]
+\includegraphics[width=0.3\linewidth]{vis/logo/logo_m.png}\\[1.5cm]
 
 % Université et département
 {\Large \textsc{Université de Montpellier}}\\[0.2cm]
@@ -55,7 +55,7 @@ header-includes:
 \vfill
 
 % Bas de page
-\includegraphics[width=0.25\linewidth]{vis/ssd.png}\\[0.3cm]
+\includegraphics[width=0.25\linewidth]{vis/logo/ssd.png}\\[0.3cm]
 {\Large Année Universitaire 2025 -- 2026}
 
 \end{center}
@@ -106,7 +106,7 @@ En utilisant 40\% des données pour le test, nous obtenons une précision de 7\%
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{vis/classif_40test_60train.png}
+    \includegraphics[width=0.65\textwidth]{vis/classif_40test_60train.png}
     \caption{SVM linéaire avec 40\% des données réservées au test}
     \label{fig:svm_iris_40test_60train}
 \end{figure}
@@ -116,6 +116,30 @@ En utilisant 40\% des données pour le test, nous obtenons une précision de 7\%
 
 Dans cette section, nous entraînons un SVM avec noyau polynomial pour discriminer les classes 1 et 2 d’Iris. Ce noyau permet de modéliser des frontières de décision non linéaires, plus flexibles que celles du SVM linéaire.  Nous comparerons ensuite ses performances et sa frontière de décision avec celles du SVM linéaire présenté précédemment.
 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{vis/classif_poly_40test_60train.png}
+    \caption{SVM polynomial avec 40\% des données réservées au test}
+    \label{fig:svm_poly_iris_40test_60train}
+\end{figure}
+
+À présent, nous comparons la classification linéaire à la vclassification polynomiale. 
+Cette dernière ajuste mieux la frontière de décision, avec une précision de 0.75 sur le jeu de test. 
+Comme pour la classification linéaire, 40\% des données ont été utilisées pour l’évaluation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{vis/classif_poly_90test_10train.png}
+    \caption{SVM polynomial avec 90\% des données réservées au test}
+    \label{fig:svm_poly_iris_90test_10train}
+\end{figure}
+
+Nous avons testé deux modèles SVM (linéaire et polynomial) sur les classes 1 et 2 de l’iris, en utilisant les caractéristiques \textit{sepal length} et \textit{sepal width}.  
+
+Avec une grande proportion de données en test (90\%), les deux modèles donnent de faibles scores, mais le SVM polynomial s’adapte mieux grâce à une frontière de décision non linéaire.  
+
+Avec une répartition plus équilibrée (60\% train / 40\% test), les performances s’améliorent. Le SVM polynomial reste légèrement meilleur, car il capture mieux la séparation non linéaire entre les classes.  
 
 
 \newpage

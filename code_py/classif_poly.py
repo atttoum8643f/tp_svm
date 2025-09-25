@@ -24,13 +24,13 @@ Y = Y[Y != 0]
 #                       Séparation train/test
 ##########################################################################
 X_train, X_test, Y_train, Y_test = train_test_split(
-    X, Y, test_size=0.4, random_state=18
+    X, Y, test_size=0.9, random_state=18
 )
 
 ##########################################################################
 #                       Entraînement du SVM polynomial
 ##########################################################################
-clf_poly = SVC(kernel="poly", degree=15)  # noyau polynomial de degré 3
+clf_poly = SVC(kernel="poly", degree=3)  # noyau polynomial de degré 3
 clf_poly.fit(X_train, Y_train)
 
 ##########################################################################
