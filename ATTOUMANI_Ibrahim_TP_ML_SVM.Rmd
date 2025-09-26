@@ -171,23 +171,24 @@ L’illustration de ce phénomène, avec et sans correction par pondération, es
 
 Dans cette partie, nous allons étudier un problème de classification appliqué à des visages.  
 La base de données utilisée est disponible à l’adresse suivante :  
-\url{https://github.com/atttoum8643f/tp_svm/tree/main/data/olivetti_visages}.  
+\textcolor{blue}{\url{https://github.com/atttoum8643f/tp_svm/tree/main/data/olivetti_visages}}.  
 
 L’objectif est d’entraîner un SVM afin de distinguer différents individus, et d’analyser l’impact du paramètre de régularisation $C$ sur les performances du modèle.  
 
-## \textcolor{blue}{3.1. Évaluation de l’influence du paramètre $C$}}
+## \textcolor{blue}{3.1. Évaluation de l’influence du paramètre $C$}
 
-La figure ci-dessous illustre l’évolution de la précision en fonction du paramètre de régularisation $C$ dans un SVM linéaire. 
-Pour des valeurs très faibles ($C \leq 10^{-4}$), la précision reste basse (environ 40--55\%), ce qui traduit un modèle trop régularisé et sous-apprenant. 
-À partir de $C \approx 10^{-3}$, la précision augmente fortement et atteint environ 85\%. 
-Ensuite, pour des valeurs plus grandes de $C$ (entre $10^{-2}$ et $10^{5}$), la précision se stabilise, indiquant que l’augmentation de $C$ n’apporte plus de gain significatif.
+La figure ci-dessous illustre l’évolution de l’erreur de prédiction en fonction du paramètre de régularisation $C$ dans un SVM linéaire.  
+Pour des valeurs très faibles ($C \leq 10^{-4}$), l’erreur est élevée (autour de 45--60\%), ce qui traduit un modèle trop régularisé et sous-apprenant.  
+À partir de $C \approx 10^{-3}$, l’erreur chute fortement et atteint environ 15\%.  
+Ensuite, pour des valeurs plus grandes de $C$ (entre $10^{-2}$ et $10^{5}$), l’erreur se stabilise, indiquant que l’augmentation de $C$ n’apporte plus de gain significatif.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{vis/influence.png}
-    \caption{SVM linéaire avec $C = 0.001$ sur données déséquilibrées.}
+    \includegraphics[width=0.6\textwidth]{vis/influence_c.png}
+    \caption{Influence du paramètre C sur la classification de visages}
     \label{fig:influence_de_c}
 \end{figure}
+
 
 \newpage
 # \textcolor{red}{Annexe}
