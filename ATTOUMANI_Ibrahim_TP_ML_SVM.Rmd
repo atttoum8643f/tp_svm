@@ -112,7 +112,7 @@ En utilisant 40\% des données pour le test, nous obtenons une précision de 7\%
 \end{figure}
 
 
-## \textcolor{blue}{2.1. SVM polynomial : discrimination entre les classes 1 et 2 d’Iris}
+## \textcolor{blue}{2.2. SVM polynomial : discrimination entre les classes 1 et 2 d’Iris}
 
 Dans cette section, nous entraînons un SVM avec noyau polynomial pour discriminer les classes 1 et 2 d’Iris. Ce noyau permet de modéliser des frontières de décision non linéaires, plus flexibles que celles du SVM linéaire.  Nous comparerons ensuite ses performances et sa frontière de décision avec celles du SVM linéaire présenté précédemment.
 
@@ -140,6 +140,12 @@ Nous avons testé deux modèles SVM (linéaire et polynomial) sur les classes 1 
 Avec une grande proportion de données en test (90\%), les deux modèles donnent de faibles scores, mais le SVM polynomial s’adapte mieux grâce à une frontière de décision non linéaire.  
 
 Avec une répartition plus équilibrée (60\% train / 40\% test), les performances s’améliorent. Le SVM polynomial reste légèrement meilleur, car il capture mieux la séparation non linéaire entre les classes.  
+
+## \textcolor{blue}{2.3. SVM GUI: données simulées déséquilibré}
+
+Cette application \textcolor{red}{svm\_gui.py}(\textcolor{blue}{https://scikit-learn.org/1.2/auto\_examples/applications/svm\_gui.html}) permet en temps réel d'évaluer l'impact du noyaux et du paramètre de régularisation $C$.
+
+Dans ce qui suit, nous allons générer un jeu de données très déséquilibré avec beaucoup plus de points dans une classe que dans l'autre. Ensuite, nous utiliserons un noyau linéaire tout en réduisant le paramètre $C$ et observerons le résultat.
 
 
 \newpage
