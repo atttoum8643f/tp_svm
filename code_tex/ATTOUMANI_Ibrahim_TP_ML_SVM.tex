@@ -151,7 +151,6 @@ sur \texttt{libsvm}). Nous apprendrons également à ajuster les
 \textbf{hyperparamètres} et le \textbf{choix du noyau} afin de mieux
 contrôler la flexibilité du modèle. \newpage
 
-
 \section{\texorpdfstring{\textcolor{red}{2. Classification sur les donnée Iris}}{}}\label{section-1}
 
 Dans cette section, nous allons mettre en œuvre un \textbf{SVM linéaire}
@@ -252,8 +251,8 @@ cherche plus à bien séparer toutes les classes.
 
 Dans un jeu de données très déséquilibré (90\% vs 10\%), cela entraîne
 un fort biais vers la classe majoritaire. La classe minoritaire est
-alors mal reconnue, voire ignorée. L'illustration ci-dessous confirme
-ces propos:
+alors mal reconnue, voire ignorée. La figure ci-dessous illustre la
+frontière de décision d'un problème déséquilibré:
 
 \begin{figure}[H]
     \centering
@@ -262,11 +261,38 @@ ces propos:
     \label{fig:simule_c_petit}
 \end{figure}
 
+Pour résoudre le problème de données déséquilibrées, nous pouvons
+utiliser l'option \texttt{class\_weight="balanced"} dans le SVM. Cette
+approche permet d'ajouter une correction par pondération, en donnant
+davantage de poids à la classe minoritaire afin d'éviter qu'elle soit
+ignorée par le modèle.
+
+L'illustration de ce phénomène, avec et sans correction par pondération,
+est présentée en annexe.
+
 \section{\texorpdfstring{\textcolor{red}{3. Classification de visage}}{}}\label{section-5}
 
 \newpage
 
 \section{\texorpdfstring{\textcolor{red}{Annexe}}{}}\label{section-6}
+
+Ce code génère un jeu de données binaire fortement déséquilibré (90,\%
+vs 10,\%). Deux modèles SVM linéaires sont ensuite entraînés : l'un sans
+pondération et l'autre avec l'option \texttt{class\_weight="balanced"}.
+Enfin, la frontière de décision de chaque modèle est tracée afin de
+comparer l'effet de la pondération sur la classe minoritaire.
+
+Le code complet utilisé pour générer les comparaisons de frontières de
+décision est disponible sur GitHub à l'adresse suivante :
+
+\textcolor{blue}{\url{https://github.com/atttoum8643f/tp_svm/blob/main/code_py/corr_ponderation.py}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{vis/pond.png}
+    \caption{Frontière de décision d’un SVM linéaire avec et sans correction par pondération}
+    \label{fig:avec_sans_pondération}
+\end{figure}
 
 \begin{thebibliography}{9}
 
