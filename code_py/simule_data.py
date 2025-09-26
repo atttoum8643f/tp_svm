@@ -34,7 +34,7 @@ print("Répartition des classes :", Counter(y))
 # Créer deux modèles SVM linéaires avec C différent
 models = {
     "SVM linéaire, C=1.0": SVC(kernel="linear", C=1.0),
-    "SVM linéaire, C=0.001": SVC(kernel="linear", C=0.001, probability=True)
+    "SVM linéaire, C=0.001": SVC(kernel="linear", C=0.001)
 }
 
 # Entraîner les modèles
