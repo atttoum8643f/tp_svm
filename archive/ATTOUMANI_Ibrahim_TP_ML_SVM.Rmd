@@ -13,7 +13,7 @@ header-includes:
   - \usepackage{amsmath}
   - \usepackage{tcolorbox}
   - \usepackage{fancyhdr}
-  - \usepackage{lipsum}
+  - \usepackage{subfigure}
   - \setlength{\headheight}{15.35403pt}
   - \addtolength{\topmargin}{-2.5pt}
   - \pagestyle{fancy}
@@ -189,9 +189,64 @@ Ensuite, pour des valeurs plus grandes de $C$ (entre $10^{-2}$ et $10^{5}$), l�
     \label{fig:influence_de_c}
 \end{figure}
 
+L’introduction de variables parasites dégrade la qualité de la classification. En effet, les résultats obtenus mettent en évidence l’impact des variables de nuisance sur les performances du classifieur.  
+Sans ajout de bruit, le taux d’erreur est d’environ $0.152$, soit une précision proche de $85\%$.   
+En revanche, lorsque l’on ajoute $500$ variables de nuisance, l’erreur augmente à $0196$ (soit une précision d’environ $80\%$).   
+
+Néanmoins, le SVM reste relativement robuste puisque la performance globale demeure correcte (voir la fonction **erreur\_svm** se trouvant dans **influ\_erreur\_c.py**).
+
+
+## \textcolor{blue}{3.2. Amélioration de la prédiction via un ACP}
+
+Afin d'améliorer les performances du classifieur, nous utilisons une réduction de dimension par \textit{Analyse en Composantes Principales} (ACP), implémentée dans \texttt{sklearn.decomposition.PCA} avec l’option \texttt{svd\_solver='randomized'}.
+
+
+L’ACP avec le critère de Kaiser (**garder que les composantes qui ont des valeurs propres supérieures à un**) a permis de réduire fortement la dimension des données : on passe de \textbf{1850 variables initiales à seulement 137 composantes principales}. Cela correspond à une réduction de plus de \textbf{90\%} de la dimension.  
+
+Malgré cette réduction importante, le modèle conserve une \textbf{bonne précision (0.770)} et explique une grande partie de l’information contenue dans les données, avec une \textbf{inertie expliquée de 93.9\%}.  
+
+En d’autres termes, on simplifie fortement les données tout en gardant l’essentiel de leur structure et de leur pouvoir explicatif.
+
+
+\begin{figure}[H]
+    \centering
+    % Première image
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{vis/variance_exp.png}
+        \caption{Variance expliquée}
+        \label{fig:variance_exp}
+    \end{minipage}
+    \hfill
+    % Deuxième image
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{vis/scatterplot_cp.png}
+        \caption{Scatter plot des composantes}
+        \label{fig:scatterplot_cp}
+    \end{minipage}
+    \label{fig:pca_results}
+\end{figure}
+
+Il existe un biais dans notre prétraittement des données de **svm\_script.py**, en effet, la normalisation (centrage-réduction) est appliquée **avant** la séparation entre les ensembles d’apprentissage et de test.  
+```{python, eval=FALSE}
+# Scale features (lignes 224–226)
+X -= np.mean(X, axis=0)
+X /= np.std(X, axis=0)
+
+# Split data into a half training and half test set
+# X_train, X_test, y_train, y_test, images_train, images_test = \
+#    train_test_split(X, y, images, test_size=0.5, random_state=0)
+# X_train, X_test, y_train, y_test = \
+#    train_test_split(X, y, test_size=0.5, random_state=0)
+```
+
+Ici, la moyenne et l’écart-type sont calculés sur toutes les données (train + test confondus), ce qui introduit une fuite d’information.
+La normalisation doit être faite après le split, en utilisant uniquement les statistiques de l’ensemble d’apprentissage.
 
 \newpage
-# \textcolor{red}{Annexe}
+
+# \textcolor{red}{4. Annexe}
 
 Ce code génère un jeu de données binaire fortement déséquilibré (90\,\% vs 10\,\%). 
 Deux modèles SVM linéaires sont ensuite entraînés : l’un sans pondération et l’autre avec l’option \texttt{class\_weight="balanced"}. Enfin, la frontière de décision de chaque modèle 

@@ -57,31 +57,33 @@ plt.show()
 
 
 # Fonction pour entraîner et calculer erreur
-def erreur_svm(X, y, n_noise=0):
+def erreur_svm(X, y, n_noise=0, seed=0):
+    np.random.seed(seed)  # fixer la graine pour le bruit
+    
     n_samples, n_features = X.shape
     if n_noise > 0:
         noise = np.random.randn(n_samples, n_noise)
         X = np.hstack((X, noise))
-    
-    # Split
+
+    # Split (graine fixée)
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.3, random_state=0, stratify=y
+        X, y, test_size=0.3, random_state=seed, stratify=y
     )
-    
+
     # Normalisation
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
-    
+
     # SVM avec C=1.0
-    clf = SVC(kernel="linear", C=1.0, random_state=0)
+    clf = SVC(kernel="linear", C=1.0, random_state=seed)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
     return 1 - accuracy_score(y_test, y_pred)
 
-# Erreurs
-err_clean = erreur_svm(X, y, n_noise=0)
-err_noisy = erreur_svm(X, y, n_noise=900)
+# Exemple
+err_clean = erreur_svm(X, y, n_noise=0, seed=18)
+err_noisy = erreur_svm(X, y, n_noise=500, seed=18)
 
 print(f"Erreur sans nuisance : {err_clean:.3f}")
 print(f"Erreur avec nuisance : {err_noisy:.3f}")

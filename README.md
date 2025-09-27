@@ -42,11 +42,20 @@ Le rapport est rédigé en LaTeX.
 
 ---
   
-  ## Génération du rapport
+## Génération du rapport
   
-  Pour compiler le fichier `.tex` et obtenir le PDF du rapport :
+Pour compiler le fichier `.tex` et obtenir le PDF du rapport :
   
-  ---
+Le rapport est rédigé en LaTeX et se trouve dans le dossier `code_tex/`.
+
+Pour générer le PDF :
+
+```{bash}
+pdflatex code_tex/ATTOUMANI_Ibrahim_TP_ML_SVM.tex
+```
+
+Le PDF sera généré dans le dossier courant (tp_svm/)
+---
   ## Références
   
   - Hastie, Tibshirani, Friedman. *The Elements of Statistical Learning*, Springer, 2009.  

@@ -39,6 +39,46 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{graphicx}
 \makeatletter
 \newsavebox\pandoc@box
@@ -67,7 +107,7 @@
 \usepackage{amsmath}
 \usepackage{tcolorbox}
 \usepackage{fancyhdr}
-\usepackage{lipsum}
+\usepackage{subfigure}
 \setlength{\headheight}{15.35403pt}
 \addtolength{\topmargin}{-2.5pt}
 \pagestyle{fancy}
@@ -150,6 +190,7 @@ simulées à l'aide de la librairie \texttt{scikit-learn} (qui s'appuie
 sur \texttt{libsvm}). Nous apprendrons également à ajuster les
 \textbf{hyperparamètres} et le \textbf{choix du noyau} afin de mieux
 contrôler la flexibilité du modèle. \newpage
+
 
 \section{\texorpdfstring{\textcolor{red}{2. Classification sur les donnée Iris}}{}}\label{section-1}
 
@@ -275,33 +316,114 @@ est présentée en annexe.
 Dans cette partie, nous allons étudier un problème de classification
 appliqué à des visages.\\
 La base de données utilisée est disponible à l'adresse suivante :\\
-\url{https://github.com/atttoum8643f/tp_svm/tree/main/data/olivetti_visages}.
+\textcolor{blue}{\url{https://github.com/atttoum8643f/tp_svm/tree/main/data/olivetti_visages}}.
 
 L'objectif est d'entraîner un SVM afin de distinguer différents
 individus, et d'analyser l'impact du paramètre de régularisation \(C\)
 sur les performances du modèle.
 
-\subsection{\texorpdfstring{\textcolor{blue}{3.1. Évaluation de l’influence du paramètre $C$}\}}{\}}}\label{section-6}
+\subsection{\texorpdfstring{\textcolor{blue}{3.1. Évaluation de l’influence du paramètre $C$}}{}}\label{section-6}
 
-La figure ci-dessous illustre l'évolution de la précision en fonction du
-paramètre de régularisation \(C\) dans un SVM linéaire. Pour des valeurs
-très faibles (\(C \leq 10^{-4}\)), la précision reste basse (environ
-40--55\%), ce qui traduit un modèle trop régularisé et sous-apprenant. À
-partir de \(C \approx 10^{-3}\), la précision augmente fortement et
-atteint environ 85\%. Ensuite, pour des valeurs plus grandes de \(C\)
-(entre \(10^{-2}\) et \(10^{5}\)), la précision se stabilise, indiquant
-que l'augmentation de \(C\) n'apporte plus de gain significatif.
+La figure ci-dessous illustre l'évolution de l'erreur de prédiction en
+fonction du paramètre de régularisation \(C\) dans un SVM linéaire.\\
+Pour des valeurs très faibles (\(C \leq 10^{-4}\)), l'erreur est élevée
+(autour de 45--60\%), ce qui traduit un modèle trop régularisé et
+sous-apprenant.\\
+À partir de \(C \approx 10^{-3}\), l'erreur chute fortement et atteint
+environ 15\%.\\
+Ensuite, pour des valeurs plus grandes de \(C\) (entre \(10^{-2}\) et
+\(10^{5}\)), l'erreur se stabilise, indiquant que l'augmentation de
+\(C\) n'apporte plus de gain significatif.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{vis/influence_c.png}
+    \includegraphics[width=0.6\textwidth]{vis/influence_c.png}
     \caption{Influence du paramètre C sur la classification de visages}
     \label{fig:influence_de_c}
 \end{figure}
 
+L'introduction de variables parasites dégrade la qualité de la
+classification. En effet, les résultats obtenus mettent en évidence
+l'impact des variables de nuisance sur les performances du
+classifieur.\\
+Sans ajout de bruit, le taux d'erreur est d'environ \(0.152\), soit une
+précision proche de \(85\%\).\\
+En revanche, lorsque l'on ajoute \(500\) variables de nuisance, l'erreur
+augmente à \(0196\) (soit une précision d'environ \(80\%\)).
+
+Néanmoins, le SVM reste relativement robuste puisque la performance
+globale demeure correcte (voir la fonction \textbf{erreur\_svm} se
+trouvant dans \textbf{influ\_erreur\_c.py}).
+
+\subsection{\texorpdfstring{\textcolor{blue}{3.2. Amélioration de la prédiction via un ACP}}{}}\label{section-7}
+
+Afin d'améliorer les performances du classifieur, nous utilisons une
+réduction de dimension par \textit{Analyse en Composantes Principales}
+(ACP), implémentée dans \texttt{sklearn.decomposition.PCA} avec l'option
+\texttt{svd\_solver='randomized'}.
+
+L'ACP avec le critère de Kaiser (\textbf{garder que les composantes qui
+ont des valeurs propres supérieures à un}) a permis de réduire fortement
+la dimension des données : on passe de
+\textbf{1850 variables initiales à seulement 137 composantes principales}.
+Cela correspond à une réduction de plus de \textbf{90\%} de la
+dimension.
+
+Malgré cette réduction importante, le modèle conserve une
+\textbf{bonne précision (0.770)} et explique une grande partie de
+l'information contenue dans les données, avec une
+\textbf{inertie expliquée de 93.9\%}.
+
+En d'autres termes, on simplifie fortement les données tout en gardant
+l'essentiel de leur structure et de leur pouvoir explicatif.
+
+\begin{figure}[H]
+    \centering
+    % Première image
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{vis/variance_exp.png}
+        \caption{Variance expliquée}
+        \label{fig:variance_exp}
+    \end{minipage}
+    \hfill
+    % Deuxième image
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{vis/scatterplot_cp.png}
+        \caption{Scatter plot des composantes}
+        \label{fig:scatterplot_cp}
+    \end{minipage}
+    \label{fig:pca_results}
+\end{figure}
+
+Il existe un biais dans notre prétraittement des données de
+\textbf{svm\_script.py}, en effet, la normalisation (centrage-réduction)
+est appliquée \textbf{avant} la séparation entre les ensembles
+d'apprentissage et de test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Scale features (lignes 224–226)}
+\NormalTok{X }\OperatorTok{{-}=}\NormalTok{ np.mean(X, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{X }\OperatorTok{/=}\NormalTok{ np.std(X, axis}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# Split data into a half training and half test set}
+\CommentTok{\# X\_train, X\_test, y\_train, y\_test, images\_train, images\_test = \textbackslash{}}
+\CommentTok{\#    train\_test\_split(X, y, images, test\_size=0.5, random\_state=0)}
+\CommentTok{\# X\_train, X\_test, y\_train, y\_test = \textbackslash{}}
+\CommentTok{\#    train\_test\_split(X, y, test\_size=0.5, random\_state=0)}
+\end{Highlighting}
+\end{Shaded}
+
+Ici, la moyenne et l'écart-type sont calculés sur toutes les données
+(train + test confondus), ce qui introduit une fuite d'information. La
+normalisation doit être faite après le split, en utilisant uniquement
+les statistiques de l'ensemble d'apprentissage.
+
 \newpage
 
-\section{\texorpdfstring{\textcolor{red}{Annexe}}{}}\label{section-7}
+\section{\texorpdfstring{\textcolor{red}{4. Annexe}}{}}\label{section-8}
 
 Ce code génère un jeu de données binaire fortement déséquilibré (90,\%
 vs 10,\%). Deux modèles SVM linéaires sont ensuite entraînés : l'un sans
