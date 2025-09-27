@@ -53,6 +53,7 @@ Pour générer le PDF :
   Le PDF sera généré dans le dossier courant (tp_svm/)
 ```{bash}
 pdflatex code_tex/ATTOUMANI_Ibrahim_TP_ML_SVM.tex
+pdflatex code_tex/ATTOUMANI_Ibrahim_TP_ML_SVM.tex
 ```
 ---
   ## Références
