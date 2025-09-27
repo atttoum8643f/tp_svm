@@ -49,12 +49,10 @@ Pour compiler le fichier `.tex` et obtenir le PDF du rapport :
 Le rapport est rédigé en LaTeX et se trouve dans le dossier `code_tex/`.
 
 Pour générer le PDF :
-
+Le PDF sera généré dans le dossier courant (tp_svm/)
 ```{bash}
 pdflatex code_tex/ATTOUMANI_Ibrahim_TP_ML_SVM.tex
 ```
-
-Le PDF sera généré dans le dossier courant (tp_svm/)
 ---
   ## Références
   
